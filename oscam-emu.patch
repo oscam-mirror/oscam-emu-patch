@@ -1,5 +1,5 @@
-patch version: 2.26.02-11943-802 (c656fef9)
-patch date: 2026-02-09 01:59:27 UTC (+00:00)
+patch version: 2.26.02-11945-802 (6c8324e0)
+patch date: 2026-02-28 18:30:06 UTC (+00:00)
 ---
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index c27d1cb1..b1f5b6d0 100644
@@ -471,7 +471,7 @@ index 4cda2edd..6cd27dae 100644
  
  #endif
 diff --git a/globals.h b/globals.h
-index efa6e780..9cbc8b79 100644
+index b71dd89b..67d19772 100644
 --- a/globals.h
 +++ b/globals.h
 @@ -368,9 +368,9 @@
@@ -484,7 +484,7 @@ index efa6e780..9cbc8b79 100644
 -#define BOARD_URL				"https://board.streamboard.tv"
 +#define BOARD_URL				"https://github.com/oscam-mirror/oscam-emu/discussions"
  #ifndef CS_VERSION
- #define CS_VERSION				"2.26.02-11943"
+ #define CS_VERSION				"2.26.02-11945"
  #endif
 @@ -407,14 +407,18 @@
  #define CS_ECM_RINGBUFFER_MAX	0x10	// max size for ECM last responsetimes ringbuffer. Keep this set to power of 2 values!
@@ -724,7 +724,7 @@ index 2adf4518..76f0a6ff 100644
  			ErrorCode = oscam_sttkd_KeyWrite(tkd_desc_info[demux[demux_id].dev_index].key_hndl, l, cw + (l * 8));
  
 diff --git a/module-dvbapi.c b/module-dvbapi.c
-index 49d71b48..591ad75d 100644
+index 6ce54038..87476f06 100644
 --- a/module-dvbapi.c
 +++ b/module-dvbapi.c
 @@ -1887,7 +1887,14 @@ void dvbapi_start_emm_filter(int32_t demux_id)
@@ -949,7 +949,7 @@ index 49d71b48..591ad75d 100644
  		// fix to handle more than one irdeto emm packet
  		uint8_t *pbuf = buffer;
  		int32_t done = 0;
-@@ -7196,8 +7336,10 @@ void dvbapi_write_cw(int32_t demux_id, int32_t pid, int32_t stream_id, uint8_t *
+@@ -7210,8 +7350,10 @@ void dvbapi_write_cw(int32_t demux_id, int32_t pid, int32_t stream_id, uint8_t *
  	for(n = 0; n < 2; n++)
  	{
  		// Check if cw has changed and if new cw is empty (all zeros)
@@ -961,7 +961,7 @@ index 49d71b48..591ad75d 100644
  		{
  			// prepare ca device
  			uint32_t idx = dvbapi_ca_set_pid(demux_id, pid, stream_id, (algo == CA_ALGO_DES), msgid);
-@@ -7489,7 +7631,9 @@ void dvbapi_send_dcw(struct s_client *client, ECM_REQUEST *er)
+@@ -7503,7 +7645,9 @@ void dvbapi_send_dcw(struct s_client *client, ECM_REQUEST *er)
  
  		// 0=matching ecm hash, 2=no filter, 3=table reset, 4=cache-ex response
  		// Check only against last_cw[0] (index 0) - No need to check the rest
@@ -972,7 +972,7 @@ index 49d71b48..591ad75d 100644
  		{
  			// check for matching control word
  			if(memcmp(er->cw, demux[i].last_cw[0][0], 8) == 0 &&
-@@ -8506,7 +8650,9 @@ int32_t dvbapi_check_ecm_delayed_delivery(int32_t demux_id, ECM_REQUEST *er)
+@@ -8520,7 +8664,9 @@ int32_t dvbapi_check_ecm_delayed_delivery(int32_t demux_id, ECM_REQUEST *er)
  	}
  
  	// Check for null cw
@@ -12093,7 +12093,7 @@ index b0179dd8..e66a1aa1 100644
  };
  
 diff --git a/oscam-ecm.c b/oscam-ecm.c
-index 0b41a32a..ecf3c160 100644
+index 7c4717f0..b930fca4 100644
 --- a/oscam-ecm.c
 +++ b/oscam-ecm.c
 @@ -2418,6 +2418,10 @@ int32_t write_ecm_answer(struct s_reader *reader, ECM_REQUEST *er, int8_t rc, ui
