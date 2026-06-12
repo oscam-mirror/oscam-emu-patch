@@ -1,5 +1,5 @@
-patch version: 2.26.05-11961-802 (5b6fa7ad)
-patch date: 2026-05-20 02:55:36 UTC (+00:00)
+patch version: 2.26.06-11965-802 (dd703725)
+patch date: 2026-06-12 19:12:49 UTC (+00:00)
 ---
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index f31b956b..5285de7c 100644
@@ -470,7 +470,7 @@ index 4cda2edd..6cd27dae 100644
  
  #endif
 diff --git a/globals.h b/globals.h
-index ae022c20..20ffc525 100644
+index c77f6178..68ae6e47 100644
 --- a/globals.h
 +++ b/globals.h
 @@ -368,9 +368,9 @@
@@ -483,7 +483,7 @@ index ae022c20..20ffc525 100644
 -#define BOARD_URL				"https://board.streamboard.tv"
 +#define BOARD_URL				"https://github.com/oscam-mirror/oscam-emu/discussions"
  #ifndef CS_VERSION
- #define CS_VERSION				"2.26.05-11961"
+ #define CS_VERSION				"2.26.06-11965"
  #endif
 @@ -407,14 +407,18 @@
  #define CS_ECM_RINGBUFFER_MAX	0x10	// max size for ECM last responsetimes ringbuffer. Keep this set to power of 2 values!
@@ -11816,10 +11816,10 @@ index 7bdc6da3..bd13862c 100644
  										if(ok == 0)
  										{
 diff --git a/module-webif.c b/module-webif.c
-index 82787f37..4e261886 100644
+index 9d2e7cbf..a2ee37fc 100644
 --- a/module-webif.c
 +++ b/module-webif.c
-@@ -176,8 +176,9 @@ static void tpl_add_group_limit_vars(struct templatevars *vars)
+@@ -201,8 +201,9 @@ static void tpl_add_group_limit_vars(struct templatevars *vars)
  #define MNU_GBX_FSTAINF     27
  #define MNU_GBX_FEXPINF     28
  #define MNU_GBX_INFOLOG     29
@@ -11830,7 +11830,7 @@ index 82787f37..4e261886 100644
  
  static void set_status_info_var(struct templatevars *vars, char *varname, int no_data, char *fmt, double value)
  {
-@@ -1363,6 +1364,11 @@ static char *send_oscam_config_streamrelay(struct templatevars *vars, struct uri
+@@ -1388,6 +1389,11 @@ static char *send_oscam_config_streamrelay(struct templatevars *vars, struct uri
  
  	tpl_printf(vars, TPLADD, "STREAM_RELAY_BUFFER_TIME", "%d", cfg.stream_relay_buffer_time);
  	tpl_printf(vars, TPLADD, "STREAM_RELAY_RECONNECT_COUNT", "%d", cfg.stream_relay_reconnect_count);
@@ -11842,7 +11842,7 @@ index 82787f37..4e261886 100644
  
  	tpl_printf(vars, TPLADD, "TMP", "STREAMCONFIGCLIENTSELECTED%d", cfg.stream_display_client);
  	tpl_addVar(vars, TPLADD, tpl_getVar(vars, "TMP"), "selected");
-@@ -2485,7 +2491,7 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
+@@ -2510,7 +2516,7 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
  		chk_reader("services", servicelabels, rdr);
  		chk_reader("lb_whitelist_services", servicelabelslb, rdr);
  
@@ -11851,7 +11851,7 @@ index 82787f37..4e261886 100644
  		{
  			if(rdr)
  				{
-@@ -3282,6 +3288,8 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
+@@ -3307,6 +3313,8 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
  	tpl_printf(vars, TPLADD, "RESHARE",      "%d", cfg.cc_reshare);
  	tpl_printf(vars, TPLADD, "CCCRECONNECT", "%d", rdr->cc_reconnect);
  
@@ -11860,7 +11860,7 @@ index 82787f37..4e261886 100644
  	if(rdr->cc_keepalive)
  		{ tpl_addVar(vars, TPLADD, "KEEPALIVECHECKED", "checked"); }
  #endif
-@@ -3319,6 +3327,23 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
+@@ -3344,6 +3352,23 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
  	tpl_addVar(vars, TPLADD, "USERSCRIPT", rdr->userscript);
  #endif
  
@@ -11884,7 +11884,7 @@ index 82787f37..4e261886 100644
  	tpl_addVar(vars, TPLADD, "PROTOCOL", reader_get_type_desc(rdr, 0));
  
  	// Show only parameters which needed for the reader
-@@ -3340,6 +3365,9 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
+@@ -3365,6 +3390,9 @@ static char *send_oscam_reader_config(struct templatevars *vars, struct uriparam
  	case R_CAMD35 :
  		tpl_addVar(vars, TPLAPPEND, "READERDEPENDINGCONFIG", tpl_getTpl(vars, "READERCONFIGCAMD35BIT"));
  		break;
@@ -11894,7 +11894,7 @@ index 82787f37..4e261886 100644
  	case R_CS378X :
  		tpl_addVar(vars, TPLAPPEND, "READERDEPENDINGCONFIG", tpl_getTpl(vars, "READERCONFIGCS378XBIT"));
  		break;
-@@ -5379,9 +5407,34 @@ static char *send_oscam_entitlement(struct templatevars *vars, struct uriparams
+@@ -5404,9 +5432,34 @@ static char *send_oscam_entitlement(struct templatevars *vars, struct uriparams
  
  					tpl_addVar(vars, TPLAPPEND, "LOGHISTORY", "<BR><BR>New Structure:<BR>");
  					char tbuffer[83];
@@ -11929,7 +11929,7 @@ index 82787f37..4e261886 100644
  						localtime_r(&item->start, &start_t);
  						localtime_r(&item->end, &end_t);
  
-@@ -5878,6 +5931,9 @@ static char *send_oscam_status(struct templatevars * vars, struct uriparams * pa
+@@ -5903,6 +5956,9 @@ static char *send_oscam_status(struct templatevars * vars, struct uriparams * pa
  						filtered = (type == cl->typ) || (type == 'x' && (cl->typ == 'p' || cl->typ == 'r') && (cl->reader && cl->reader->cacheex.mode));
  #else
  						filtered = (type == cl->typ);
@@ -11939,7 +11939,7 @@ index 82787f37..4e261886 100644
  #endif
  					}
  				}
-@@ -7488,6 +7544,9 @@ static char *send_oscam_files(struct templatevars * vars, struct uriparams * par
+@@ -7513,6 +7569,9 @@ static char *send_oscam_files(struct templatevars * vars, struct uriparams * par
  		{ "stats.info",      MNU_GBX_FSTAINF,   FTYPE_GBOX },     // id 27
  		{ "expired.info",    MNU_GBX_FEXPINF,   FTYPE_GBOX },     // id 28
  		{ "info.log",        MNU_GBX_INFOLOG,   FTYPE_GBOX },     // id 29
@@ -11949,7 +11949,7 @@ index 82787f37..4e261886 100644
  #endif
  		{ NULL, 0, 0 },
  	};
-@@ -7960,7 +8019,11 @@ static char *send_oscam_EMM_running(struct templatevars * vars, struct uriparams
+@@ -7985,7 +8044,11 @@ static char *send_oscam_EMM_running(struct templatevars * vars, struct uriparams
  		else if(!proxy && rdr->csystem_active)     // local active reader
  		{
  			csystem = rdr->csystem;
@@ -11962,7 +11962,7 @@ index 82787f37..4e261886 100644
  		}
  
  		if(csystem)
-@@ -9200,7 +9263,11 @@ static int8_t check_request(char *result, int32_t readen)
+@@ -9225,7 +9288,11 @@ static int8_t check_request(char *result, int32_t readen)
  static int32_t readRequest(FILE * f, IN_ADDR_T in, char **result, int8_t forcePlain)
  {
  	int32_t n, bufsize = 0, errcount = 0;
@@ -12015,10 +12015,10 @@ index 78d031ea..0396bf71 100644
  		return 1; // reader caid is not real caid
  	}
 diff --git a/oscam-config-global.c b/oscam-config-global.c
-index 38e0e464..8e6f6284 100644
+index 1d6fd8db..1126e236 100644
 --- a/oscam-config-global.c
 +++ b/oscam-config-global.c
-@@ -941,6 +941,10 @@ static const struct config_list streamrelay_opts[] =
+@@ -967,6 +967,10 @@ static const struct config_list streamrelay_opts[] =
  	DEF_OPT_STR("stream_source_auth_password"    , OFS(stream_source_auth_password),  NULL),
  	DEF_OPT_UINT32("stream_relay_buffer_time"    , OFS(stream_relay_buffer_time),     0),
  	DEF_OPT_UINT8("stream_relay_reconnect_count" , OFS(stream_relay_reconnect_count), 0),
@@ -12092,7 +12092,7 @@ index b0179dd8..e66a1aa1 100644
  };
  
 diff --git a/oscam-ecm.c b/oscam-ecm.c
-index 7c4717f0..b930fca4 100644
+index 6b9c6c52..d4903348 100644
 --- a/oscam-ecm.c
 +++ b/oscam-ecm.c
 @@ -2418,6 +2418,10 @@ int32_t write_ecm_answer(struct s_reader *reader, ECM_REQUEST *er, int8_t rc, ui
@@ -12196,7 +12196,7 @@ index 576804c9..6e1c7137 100644
  	return "unknown";
  }
 diff --git a/oscam.c b/oscam.c
-index ce936a44..2f757fda 100644
+index 78ec882e..318d2bff 100644
 --- a/oscam.c
 +++ b/oscam.c
 @@ -44,6 +44,10 @@
@@ -12229,7 +12229,7 @@ index ce936a44..2f757fda 100644
  
  	NULL
  };
-@@ -1861,6 +1870,9 @@ int32_t main(int32_t argc, char *argv[])
+@@ -1862,6 +1871,9 @@ int32_t main(int32_t argc, char *argv[])
  
  	init_sidtab();
  	init_readerdb();
@@ -12387,7 +12387,7 @@ index fbf1d18b..654fc692 100644
  READERCONFIGGBOXBIT           readerconfig/readerconfig_gboxbit.html                      MODULE_GBOX
  READERINFOGBOXREMM            readerconfig/readerinfo_gbox_remm.html                      MODULE_GBOX
 diff --git a/webif/readerconfig/readerconfig_cccambit.html b/webif/readerconfig/readerconfig_cccambit.html
-index 3812bec7..85232402 100644
+index 9b4678aa..63d9e7bd 100644
 --- a/webif/readerconfig/readerconfig_cccambit.html
 +++ b/webif/readerconfig/readerconfig_cccambit.html
 @@ -22,4 +22,5 @@
