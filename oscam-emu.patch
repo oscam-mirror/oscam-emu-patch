@@ -1,8 +1,8 @@
-patch version: 2.26.11-11986-802 (d9137cf0)
-patch date: 2026-11-15 17:47:17 UTC (+00:00)
+patch version: 2.26.11-11987-802 (e29367c1)
+patch date: 2026-11-16 15:25:18 UTC (+00:00)
 ---
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e7004fa6..534e662c 100644
+index 5c0efd4e..9e4e959e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -637,6 +637,22 @@ endif (CONFIG_STREAMRELAY MATCHES "Y" AND NOT MODULE_STREAMRELAY EQUAL 1)
@@ -28,7 +28,7 @@ index e7004fa6..534e662c 100644
  execute_process (COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/config.sh --show-valid OUTPUT_VARIABLE config_vars_string OUTPUT_STRIP_TRAILING_WHITESPACE)
  string(REGEX MATCHALL "[A-Z0-9_]+" config_vars ${config_vars_string})
  
-@@ -1019,6 +1035,24 @@ endif( HAVE_LIBRT OR HAVE_LIBRT_STATIC)
+@@ -1016,6 +1032,24 @@ endif( HAVE_LIBRT OR HAVE_LIBRT_STATIC)
  
  #--------------------------------------------------------------------------------
  
@@ -53,7 +53,7 @@ index e7004fa6..534e662c 100644
  #----------------------- installation -----------------------------
  
  file (GLOB config_files "${CMAKE_CURRENT_SOURCE_DIR}/Distribution/oscam.*")
-@@ -1127,4 +1161,11 @@ if (HAVE_LIBDVBCSA)
+@@ -1124,4 +1158,11 @@ if (HAVE_LIBDVBCSA)
  	endif (LIBDVBCSADIR)
  endif (HAVE_LIBDVBCSA)
  
@@ -96,7 +96,7 @@ index a43c9db6..4b5d2a76 100644
  	  1 = send keepalive messages to keep connection to remote CCCam server up, default:0
  
 diff --git a/Makefile b/Makefile
-index 279b4794..8d86ff4e 100644
+index 71546d11..b43683ff 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -28,6 +28,9 @@ ifeq ($(uname_S),Darwin)
@@ -452,7 +452,7 @@ index 4cda2edd..6cd27dae 100644
  
  #endif
 diff --git a/globals.h b/globals.h
-index 5f444a32..03678600 100644
+index d738f1f8..a7c53df2 100644
 --- a/globals.h
 +++ b/globals.h
 @@ -368,9 +368,9 @@
@@ -465,7 +465,7 @@ index 5f444a32..03678600 100644
 -#define BOARD_URL				"https://board.streamboard.tv"
 +#define BOARD_URL				"https://github.com/oscam-mirror/oscam-emu/discussions"
  #ifndef CS_VERSION
- #define CS_VERSION				"2.26.11-11986"
+ #define CS_VERSION				"2.26.11-11987"
  #endif
 @@ -407,14 +407,18 @@
  #define CS_ECM_RINGBUFFER_MAX	0x10	// max size for ECM last responsetimes ringbuffer. Keep this set to power of 2 values!
