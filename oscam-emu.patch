@@ -1,5 +1,5 @@
-patch version: 2.26.11-11989-802 (71c06010)
-patch date: 2026-11-17 01:47:42 UTC (+00:00)
+patch version: 2.26.11-11991-802 (efe064ec)
+patch date: 2026-11-19 15:40:24 UTC (+00:00)
 ---
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 5c0efd4e..9e4e959e 100644
@@ -452,7 +452,7 @@ index 4cda2edd..6cd27dae 100644
  
  #endif
 diff --git a/globals.h b/globals.h
-index 92c49be1..8e1a0afa 100644
+index f6be06fa..71fb67bc 100644
 --- a/globals.h
 +++ b/globals.h
 @@ -368,9 +368,9 @@
@@ -465,7 +465,7 @@ index 92c49be1..8e1a0afa 100644
 -#define BOARD_URL				"https://board.streamboard.tv"
 +#define BOARD_URL				"https://github.com/oscam-mirror/oscam-emu/discussions"
  #ifndef CS_VERSION
- #define CS_VERSION				"2.26.11-11989"
+ #define CS_VERSION				"2.26.11-11991"
  #endif
 @@ -407,14 +407,18 @@
  #define CS_ECM_RINGBUFFER_MAX	0x10	// max size for ECM last responsetimes ringbuffer. Keep this set to power of 2 values!
@@ -12012,7 +12012,7 @@ index 1d6fd8db..1126e236 100644
  	DEF_OPT_INT8("stream_reuse_client"           , OFS(stream_reuse_client),          0),
  #ifdef WEBIF
 diff --git a/oscam-config-reader.c b/oscam-config-reader.c
-index 02880e13..ef8a60b4 100644
+index a128ce1c..e50f0ec9 100644
 --- a/oscam-config-reader.c
 +++ b/oscam-config-reader.c
 @@ -114,6 +114,7 @@ static void protocol_fn(const char *token, char *value, void *setting, FILE *f)
